@@ -1,79 +1,63 @@
 body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
   background: #0A0A1F;
-  color: #ffffff;
-}
-.hero {
+  color: white;
+  font-family: Arial, sans-serif;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  background: linear-gradient(145deg, #0A0A1F, #111133);
-  padding: 0 2rem;
+  margin: 0;
 }
-.hero-content {
+
+#chat-container {
+  width: 380px;
+  height: 600px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
-.text-section {
+
+#messages {
   flex: 1;
-  min-width: 300px;
-  padding-right: 2rem;
+  overflow-y: auto;
+  margin-bottom: 10px;
 }
-.tag {
-  background: #00D4FF;
-  color: #0A0A1F;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  display: inline-block;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-.title {
-  font-size: 3rem;
-  line-height: 1.2;
-  font-weight: 800;
-  margin-bottom: 1rem;
-}
-.title span { color: #00D4FF; }
-.subtitle {
-  font-size: 1.1rem;
-  color: #b0b0c0;
-  max-width: 500px;
-  margin-bottom: 2rem;
-}
-.buttons { display: flex; gap: 1rem; }
-.btn {
-  padding: 0.9rem 1.6rem;
+
+.message {
+  padding: 8px 12px;
+  margin-bottom: 6px;
   border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
 }
-.btn.primary { background: #00D4FF; color: #0A0A1F; }
-.btn.primary:hover { background: #00ffcc; }
-.btn.secondary {
-  border: 2px solid #00D4FF;
-  color: #00D4FF;
+
+.user {
+  background: #00D4FF;
+  color: black;
+  text-align: right;
 }
-.btn.secondary:hover { background: rgba(0, 212, 255, 0.1); }
-.visual {
-  flex: 1;
+
+.bot {
+  background: rgba(255,255,255,0.1);
+}
+
+#input-area {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
-.icon { width: 280px; filter: drop-shadow(0 0 20px #00D4FF); }
-footer {
-  text-align: center;
-  padding: 1rem;
-  color: #667;
-  background: #0A0A1F;
-  font-size: 0.85rem;
+
+#user-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+#send-btn {
+  padding: 10px 16px;
+  margin-left: 8px;
+  border-radius: 8px;
+  background: #00D4FF;
+  border: none;
+  cursor: pointer;
 }
