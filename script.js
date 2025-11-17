@@ -1,12 +1,22 @@
-// ===============================
-// UseClevr Bot - script.js (FRONTEND)
-// ===============================
-
 const messagesDiv = document.getElementById("messages");
 const input = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
+const typingDiv = document.getElementById("typing");
+const floatingBtn = document.getElementById("floating-button");
+const widget = document.getElementById("chat-widget");
+const closeBtn = document.getElementById("close-widget");
 
-// Add message bubble
+// Open widget
+floatingBtn.onclick = () => {
+  widget.classList.remove("hidden");
+};
+
+// Close widget
+closeBtn.onclick = () => {
+  widget.classList.add("hidden");
+};
+
+// Add message helper
 function addMessage(text, sender) {
   const div = document.createElement("div");
   div.className = `message ${sender}`;
@@ -15,13 +25,14 @@ function addMessage(text, sender) {
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-// Send message to backend
 async function sendMessage() {
   const text = input.value.trim();
   if (!text) return;
 
   addMessage(text, "user");
   input.value = "";
+
+  typingDiv.classList.remove("hidden");
 
   try {
     const response = await fetch("/api/chat", {
@@ -32,18 +43,18 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    if (data.reply) addMessage(data.reply, "bot");
-    else addMessage("(No response from server)", "bot");
+    typingDiv.classList.add("hidden");
 
-  } catch (error) {
-    addMessage("❌ Server Offline — Check your backend!", "bot");
+    if (data.reply) addMessage(data.reply, "bot");
+    else addMessage("(No response)", "bot");
+
+  } catch (err) {
+    typingDiv.classList.add("hidden");
+    addMessage("Error contacting server.", "bot");
   }
 }
 
-// Click button
 sendBtn.onclick = sendMessage;
-
-// Press Enter
-input.addEventListener("keypress", function(e) {
+input.addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendMessage();
 });
