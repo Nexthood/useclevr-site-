@@ -1,0 +1,77 @@
+{
+  "company": {
+    "name": "UseClevr",
+    "mission": "Turn raw data into instant intelligence using AI so teams can make better decisions with zero technical complexity.",
+    "vision": "Make advanced data analytics accessible to every business through AI automation.",
+    "description": "UseClevr is an AI-powered data automation platform that transforms CSV files, spreadsheets, and Snowflake data into instant insights, summaries, dashboards, and decision-ready intelligence."
+  },
+
+  "products": {
+    "data_assistant": {
+      "name": "UseClevr Data Assistant",
+      "description": "Upload a CSV or connect Snowflake and ask any question in natural language to get instant insights, charts, summaries, and automated reports.",
+      "features": [
+        "CSV upload & analysis",
+        "Snowflake connection",
+        "Natural language insights",
+        "Automated reporting",
+        "Charts and dashboard generation",
+        "Data cleaning & transformation",
+        "AI-powered summaries",
+        "Business KPI detection"
+      ]
+    }
+  },
+
+  "pricing": {
+    "start": "UseClevr offers simple monthly plans based on usage.",
+    "plans": [
+      {
+        "name": "Starter",
+        "description": "For small teams or individuals who want instant data insights.",
+        "includes": ["CSV uploads", "Instant AI insights", "Basic charts", "Email support"]
+      },
+      {
+        "name": "Pro",
+        "description": "For businesses that need advanced analytics and Snowflake integration.",
+        "includes": ["CSV + Snowflake", "Automated reports", "Charts & dashboards", "Team collaboration"]
+      }
+    ],
+    "custom": "Enterprise plans available for large teams or custom requirements."
+  },
+
+  "faq": {
+    "what_is_useclevr": "UseClevr is an AI data assistant that automates analytics. Upload a CSV or connect Snowflake, ask any question, and get instant insights, charts, and summaries.",
+    "services": "UseClevr provides AI-powered data automation, instant analytics, dashboard generation, and automated report creation.",
+    "products": "UseClevr offers the UseClevr Data Assistant: an AI platform for turning CSVs and Snowflake data into insights.",
+    "pricing": "UseClevr offers a Starter plan, Pro plan, and Enterprise custom pricing based on usage.",
+    "who_is_it_for": "Designed for founders, operations teams, marketers, analysts, and SMBs."
+  },
+
+  "branding": {
+    "tone": "Professional, friendly, confident, short, clear.",
+    "do_not": [
+      "Do not ramble.",
+      "Do not talk like ChatGPT.",
+      "Do not give generic answers.",
+      "Do not be unsure.",
+      "Do not over-explain."
+    ],
+    "style": {
+      "sentence_length": "short",
+      "formatting": "simple",
+      "voice": "helpful expert"
+    }
+  },
+
+  "internal_admin": {
+    "commands": {
+      "summary": "Generate high-level summaries of data, documents, or business topics.",
+      "task_create": "Create tasks for internal workflow.",
+      "report_weekly": "Generate weekly business performance summaries.",
+      "email_draft": "Draft emails or messages.",
+      "csv_analyze": "Analyze uploaded data."
+    },
+    "notes": "Admin mode is only for internal use. Public users should not see admin tools."
+  }
+}
