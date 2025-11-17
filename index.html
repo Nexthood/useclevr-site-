@@ -9,18 +9,26 @@
 
 <body>
 
-  <div class="center">
-    <div id="chat-avatar">
-      <img src="./assets/avatar.png" alt="UseClevr Avatar">
+  <!-- Floating Chat Button -->
+  <div id="floating-button">
+    <img src="./assets/avatar.png" alt="UseClevr Avatar" />
+  </div>
+
+  <!-- Chat Widget -->
+  <div id="chat-widget" class="hidden">
+    <div class="widget-header">
+      <img src="./assets/avatar.png" class="header-avatar" />
+      <span>UseClevr Assistant</span>
+      <button id="close-widget">×</button>
     </div>
 
-    <div id="chat-container">
-      <div id="messages"></div>
+    <div id="messages"></div>
 
-      <div id="input-area">
-        <input id="user-input" placeholder="Ask UseClevr..." />
-        <button id="send-btn">Send</button>
-      </div>
+    <div id="typing" class="hidden">UseClevr is typing...</div>
+
+    <div id="input-area">
+      <input id="user-input" placeholder="Ask UseClevr..." />
+      <button id="send-btn">Send</button>
     </div>
   </div>
 
