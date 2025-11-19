@@ -8,6 +8,12 @@
 </head>
 <body>
 
+  <!-- Branding Top Bar -->
+  <header id="brand-bar">
+    <img src="./assets/useclevr-logo.png" id="brand-logo" />
+    <span id="brand-title">UseClevr</span>
+  </header>
+
   <!-- Floating Central Launcher -->
   <div id="central-launcher">
     <img src="./assets/avatar.png" />
@@ -29,7 +35,9 @@
       <button class="action-btn" data-action="about">What is UseClevr?</button>
       <button class="action-btn" data-action="pricing">Pricing</button>
       <button class="action-btn csv-btn" data-action="csv">Analyze CSV</button>
+
       <input type="file" id="csv-file" class="csv-input hidden" accept=".csv" />
+
       <button class="action-btn" data-action="contact">Contact</button>
     </div>
 
@@ -40,18 +48,21 @@
 
     <div id="smart-response"></div>
 
+    <!-- KPI Cards -->
     <div id="kpi-cards" class="kpi-container hidden">
       <div class="kpi-card" id="kpi-1"></div>
       <div class="kpi-card" id="kpi-2"></div>
       <div class="kpi-card" id="kpi-3"></div>
     </div>
 
+    <!-- Testimonials -->
     <div class="testimonials">
       <div class="t-item active">“UseClevr helped us understand our sales instantly.” – Acme Corp</div>
       <div class="t-item">“The CSV insights saved us 10+ hours weekly.” – DataFlow Ltd</div>
       <div class="t-item">“Best AI tool we've used this year.” – NovaTech</div>
     </div>
 
+    <!-- Pricing CTA -->
     <div class="pricing-cta">
       <div class="price-title">🔥 Lifetime Deal</div>
       <div class="price-old">$350</div>
