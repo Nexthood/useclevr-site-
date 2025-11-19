@@ -1,26 +1,35 @@
-/* USECLEVR PREMIUM NEON–GLASS UI */
-/* ───────────────────────────────────────────── */
-
+  /* USECLEVR PREMIUM NEON–GLASS UI */
 body {
   background: #0a0a1f;
   margin: 0;
-  padding: 0;
   font-family: "Inter", Arial, sans-serif;
   color: white;
 }
 
-/* SMOOTH FADE ANIMATION */
-.fade-in {
-  animation: fadeIn 0.35s ease forwards;
+/* Branding bar */
+#brand-bar {
+  width: 100%;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 16px;
+  background: rgba(0,212,255,0.08);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0,212,255,0.25);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+#brand-logo {
+  width: 38px;
+  height: 38px;
 }
 
-/* ───────────────────────────────────────────── */
-/* CENTRAL LAUNCHER */
+#brand-title {
+  font-size: 20px;
+  color: #a9faff;
+}
+
+/* Launcher */
 #central-launcher {
   position: fixed;
   bottom: 38px;
@@ -28,207 +37,137 @@ body {
   transform: translateX(-50%);
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.20);
   padding: 12px 20px;
   border-radius: 16px;
-  cursor: pointer;
   display: flex;
   gap: 10px;
-  align-items: center;
-  transition: 0.25s;
+  cursor: pointer;
   box-shadow: 0 0 24px rgba(0,212,255,0.7);
-  z-index: 1000;
-}
-
-#central-launcher img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-}
-
-#central-launcher span {
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+  transition: 0.25s;
 }
 
 #central-launcher:hover {
   transform: translateX(-50%) scale(1.06);
-  box-shadow: 0 0 34px rgba(0,212,255,1);
 }
 
-/* ───────────────────────────────────────────── */
-/* CENTRAL PANEL */
+/* Panel */
 #central-panel {
   position: fixed;
-  top: 50%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
+  padding: 22px;
   background: rgba(255,255,255,0.07);
   backdrop-filter: blur(18px);
   border-radius: 24px;
   border: 1px solid rgba(255,255,255,0.18);
-  padding: 22px;
   box-shadow: 0 20px 80px rgba(0,0,0,0.50);
-  opacity: 1;
-  transition: opacity 0.25s, transform 0.25s;
-  z-index: 2000;
+  transition: 0.25s;
 }
 
 .hidden {
   opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, -44%);
 }
 
-/* ───────────────────────────────────────────── */
-/* HEADER */
+/* Header */
 .panel-header {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
 }
 
 .panel-avatar {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  margin-right: 10px;
   box-shadow: 0 0 12px rgba(0,212,255,0.6);
-}
-
-.panel-header span {
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
+  margin-right: 10px;
 }
 
 #panel-close {
   margin-left: auto;
+  font-size: 26px;
   background: none;
   border: none;
   color: #c7f7ff;
-  font-size: 28px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-#panel-close:hover {
-  color: white;
-  transform: scale(1.15);
-}
-
-/* TAGLINE */
+/* Tagline */
 .tagline {
-  color: #aafaff;
-  font-size: 14px;
-  margin-bottom: 14px;
   text-align: center;
-  opacity: 0.9;
+  font-size: 14px;
+  color: #aafaff;
+  margin: 10px 0;
 }
 
-/* ───────────────────────────────────────────── */
-/* ACTION BUTTONS */
+/* Buttons */
 .panel-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
-  margin-bottom: 16px;
 }
 
 .action-btn {
-  padding: 8px 12px;
-  background: rgba(0,212,255,0.20);
-  border: 1px solid rgba(0,212,255,0.40);
-  color: white;
+  padding: 10px 14px;
   border-radius: 12px;
+  background: rgba(0,212,255,0.2);
+  border: 1px solid rgba(0,212,255,0.4);
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.25s;
+  color: white;
 }
 
-.action-btn:hover {
-  background: rgba(0,212,255,0.40);
-  box-shadow: 0 0 14px rgba(0,212,255,0.5);
-}
-
-.csv-input {
-  display: none;
-}
-
-/* ───────────────────────────────────────────── */
-/* INPUT FIELD */
+/* Input */
 .panel-input {
   display: flex;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-top: 16px;
 }
 
 #user-input {
   flex: 1;
   padding: 10px;
-  background: rgba(255,255,255,0.15);
-  border: none;
   border-radius: 12px;
+  background: rgba(255,255,255,0.12);
+  border: none;
   color: white;
-  font-size: 15px;
 }
 
 #send-btn {
-  background: #00d4ff;
-  border: none;
-  padding: 10px 14px;
+  padding: 10px;
   border-radius: 12px;
+  background: #00eaff;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.25s;
 }
 
-#send-btn:hover {
-  background: #37ecff;
-}
-
-/* RESPONSE */
+/* Response */
 #smart-response {
-  color: white;
-  font-size: 15px;
-  min-height: 40px;
-  margin-bottom: 14px;
-  line-height: 1.4;
+  margin: 16px 0;
 }
 
-/* ───────────────────────────────────────────── */
-/* KPI CARDS */
+/* KPI Cards */
 .kpi-container {
   display: flex;
   gap: 10px;
-  margin: 14px 0;
-  justify-content: center;
 }
 
 .kpi-card {
   flex: 1;
   padding: 12px;
   background: rgba(0,212,255,0.15);
-  border: 1px solid rgba(0,212,255,0.35);
-  border-radius: 14px;
-  color: white;
-  font-size: 13px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 0 18px rgba(0,212,255,0.25);
 }
 
-/* ───────────────────────────────────────────── */
-/* TESTIMONIALS */
+/* Testimonials */
 .testimonials {
-  margin-top: 6px;
-  height: 26px;
+  margin: 8px 0;
+  height: 28px;
   overflow: hidden;
-  color: rgba(255,255,255,0.75);
-  font-size: 13px;
   text-align: center;
+  opacity: 0.8;
 }
 
 .t-item {
@@ -239,52 +178,11 @@ body {
   display: block;
 }
 
-/* ───────────────────────────────────────────── */
-/* PRICING CTA */
+/* Pricing CTA */
 .pricing-cta {
-  background: rgba(0,212,255,0.12);
-  padding: 16px;
-  border-radius: 18px;
-  text-align: center;
-  border: 1px solid rgba(0,212,255,0.3);
   margin-top: 16px;
+  padding: 16px;
+  background: rgba(0,212,255,0.15);
+  border-radius: 16px;
+  text-align: center;
 }
-
-.price-title {
-  color: white;
-  font-size: 20px;
-  margin-bottom: 6px;
-  font-weight: bold;
-}
-
-.price-old {
-  color: #aaa;
-  font-size: 16px;
-  text-decoration: line-through;
-}
-
-.price-new {
-  color: #00eaff;
-  font-size: 28px;
-  font-weight: bold;
-  margin: 6px 0;
-}
-
-.price-new span {
-  font-size: 14px;
-  color: #fff;
-}
-
-.trial {
-  color: #c0faff;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.cta-button {
-  width: 100%;
-  padding: 12px;
-  background: #00eaff;
-  color: #000;
-  border: none;
-  border-radius: 14px
