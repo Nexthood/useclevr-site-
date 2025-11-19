@@ -1,105 +1,69 @@
-// /api/csv.js — UseClevr Advanced CSV Analysis Engine
-// -------------------------------------------------------------
-// Vercel Serverless Function
-// Extracts insights + KPIs in structured JSON
-// Uses OpenAI gpt-4.1 for high-quality analysis
+// /api/csv.js — UseClevr Advanced CSV Analysis Engine // ------------------------------------------------------------- // Vercel Serverless Function // Extracts insights + KPIs in structured JSON // Uses OpenAI gpt-4.1 for high‑quality analysis
 
 import OpenAI from "openai";
 
-// Disable default body parser → enable raw file upload
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// Disable default body parser → enable raw file upload export const config = { api: { bodyParser: false, }, };
 
-// Read raw request body
-async function readRawBody(req) {
-  return new Promise((resolve, reject) => {
-    let chunks = [];
-    req.on("data", c => chunks.push(c));
-    req.on("end", () => resolve(Buffer.concat(chunks)));
-    req.on("error", reject);
-  });
+// Helper: read multipart form-data into buffer async function readRawBody(req) { return new Promise((resolve, reject) => { let chunks = []; req.on("data", (c) => chunks.push(c)); req.on("end", () => resolve(Buffer.concat(chunks))); req.on("error", reject); }); }
+
+// Helper: extract CSV content from multipart upload function extractCSV(buffer) { const text = buffer.toString("utf8"); const firstBreak = text.indexOf("\n"); return text.substring(firstBreak + 1); }
+
+export default async function handler(req, res) { if (req.method !== "POST") { return res.status(405).json({ error: "Method not allowed" }); }
+
+try { // Read raw upload const buffer = await readRawBody(req); const csvText = extractCSV(buffer).trim();
+
+if (!csvText || csvText.length < 5) {
+  return res.status(400).json({ error: "Invalid or empty CSV." });
 }
 
-// Extract CSV text from uploaded file
-function extractCSV(buffer) {
-  const text = buffer.toString("utf8");
-  const firstBreak = text.indexOf("\n");
-  return text.substring(firstBreak + 1);
-}
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+// ADVANCED CSV ANALYSIS PROMPT
+const prompt = `
 
-  try {
-    const buffer = await readRawBody(req);
-    const csvText = extractCSV(buffer).trim();
+You are UseClevr's advanced data analyst. Analyze this CSV STRICTLY and return:
 
-    if (!csvText || csvText.length < 5) {
-      return res.status(400).json({ error: "Invalid or empty CSV." });
-    }
+1. A short, clean summary (3 sentences max).
 
-    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-    // AI Prompt
-    const prompt = `
-You are UseClevr's advanced data analyst.
-Analyze this CSV STRICTLY and return:
+2. EXACT 3 KPI values, formatted SHORT. Examples:
 
-1. A short summary (max 3 sentences)
-2. EXACT 3 KPIs (short, numeric)
-3. One key insight
-4. One recommendation
+Revenue Growth: +12%
 
-CSV DATA:
-${csvText}
+Avg. Order Value: $47
 
-Return ONLY JSON:
-{
-  "summary": "...",
-  "kpis": ["...", "...", "..."],
-  "insight": "...",
-  "recommendation": "..."
-}
-`;
+Churn Rate: 2.1%
 
-    const completion = await client.chat.completions.create({
-      model: "gpt-4.1",
-      temperature: 0.2,
-      response_format: { type: "json_object" },
-      messages: [{ role: "user", content: prompt }],
-    });
 
-    let jsonResponse = completion.choices?.[0]?.message?.content;
 
-    let parsed;
-    try {
-      parsed = JSON.parse(jsonResponse);
-    } catch (e) {
-      // fallback: if AI returned messy JSON, fix it
-      jsonResponse = jsonResponse
-        .replace(/[\n\r]/g, " ")
-        .replace(/```json/g, "")
-        .replace(/```/g, "");
+3. A "Key Insight" (1 sentence).
 
-      parsed = JSON.parse(jsonResponse);
-    }
 
-    return res.status(200).json({
-      reply: parsed.summary,
-      kpis: parsed.kpis,
-      insight: parsed.insight,
-      recommendation: parsed.recommendation,
-    });
+4. A "Recommendation" (1 actionable sentence).
 
-  } catch (err) {
-    console.error("CSV ANALYSIS ERROR:", err);
-    return res.status(500).json({
-      error: "Failed to analyze CSV."
-    });
-  }
-}
+
+
+CSV DATA: ${csvText}
+
+Return JSON ONLY in this format ↓↓↓ { "summary": "...", "kpis": ["KPI1", "KPI2", "KPI3"], "insight": "...", "recommendation": "..." } `;
+
+const completion = await client.chat.completions.create({
+  model: "gpt-4.1", // higher quality for structured output
+  temperature: 0.2,
+  response_format: { type: "json_object" },
+  messages: [
+    { role: "user", content: prompt }
+  ],
+});
+
+const json = completion.choices?.[0]?.message?.content;
+const parsed = JSON.parse(json);
+
+return res.status(200).json({
+  reply: parsed.summary,
+  kpis: parsed.kpis,
+  insight: parsed.insight,
+  recommendation: parsed.recommendation,
+});
+
+} catch (err) { console.error("CSV ANALYSIS ERROR:", err); return res.status(500).json({ error: "Failed to analyze CSV." }); } }
